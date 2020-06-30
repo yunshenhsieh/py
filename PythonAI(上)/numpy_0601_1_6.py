@@ -1,0 +1,18 @@
+import numpy as np
+a=np.arange(0,36).reshape(6,6)
+print(a)
+
+print(a[4,5])
+print(a[4,-1])
+print(' ')
+print(a[3,1:4])
+print(' ')
+print(a[:3,3:])
+print(' ')
+print(a[2,:])
+print(' ')
+print(a[:,3])
+print(' ')
+print(a[:,::2])
+print(' ')
+print(a[::2,::3])

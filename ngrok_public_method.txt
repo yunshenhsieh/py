@@ -1,0 +1,1 @@
+ngrok http <yourport> -host-header="localhost:<yourport>"

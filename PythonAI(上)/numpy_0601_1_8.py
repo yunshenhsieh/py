@@ -1,0 +1,12 @@
+import numpy as np
+x=np.arange(25).reshape(5,5)
+print(x)
+print('')
+print(x[[0,1,2],[0,1,0]])
+print('')
+print(x[[0],[1,2,4]])
+print('')
+print(x[[2,4]])
+print('')
+print(x[x>20])
+print(x[x%2 == 0])
