@@ -1,0 +1,17 @@
+1.建議大家專題不要專注在美化前端(網頁或視覺呈現)上面，因為我們是系統工程師，是要注重後面的資料處理。
+2.老師覺得python,linux,RDB，這三門是此課程的核心基礎，最重要(老師覺得，我也覺得)。
+3.div#main-container為「選擇器」內的寫法，網頁實際內容<div id="main-container">，文字表達意思為「div這個標籤裡，有一個id，叫main-container」，#字號表示"id"。
+4.「id：#，class：.」，基本上只會用到這兩個，id只會出現一次，不能重覆，請記一下。
+5.例：網頁：<div class="apple banana" id="title">   選擇器：div.apple.banana#title。這裡的選擇器就是CSS裡面選擇器的寫法。
+6.用「?」可以讓你把這個參數帶給這個網頁，可以讓你把參數直接用網址帶入的方法叫「http method get」，這比較不安全，另一種叫「http method post」比較安全。
+7.每個網址的拆解方式都不一樣，需要自己觀察，慢慢試，慢慢猜，而寫簡易爬蟲時，參數能少就少，盡可能留下自己看的懂的參數就好，看不懂的先想辦法弄懂，再來試著把不懂的刪掉，沒有變化或問題出現可以不用留。
+8.對網頁提出請求為「request」，網頁回應為「responds」。
+9.打完搜尋後，進到F12開發者環境裡的「Network」，第一個search裡會放有我們輸入的資料。
+10.輸入資訊存放位置：Get request =>First response=>Query String Parameters，POST request=>First respons=>Form Data
+11.<div></div>通常一開始要編輯網頁時先畫出一個區塊，然後就開始在裡面做東西，像挖一個洞。<p></p>主要只是用來做內容分段，區分段落用。
+12.表格比較常碰到，建議要會，對美觀跟呈現很有用。
+13.表單(form)可以送出我們的需求，<input type="hidden" name="_hid" value="data">這個是伺服器自動一起送出的「隱藏」資料，可以用來防爬蟲。
+14.在開發者工具的記錄中，<input name="" >，name這個屬性的資料會在你輸入的資料前面，呈現格式就像python的字典。
+15.div.任意名稱{<code>}為CSS裡的寫法，假如某html內有個<div class="任意名稱">，則這個div裡面格式都會套用「div.任意名稱{<code>}」裡要求的格式，老師說這個就叫做「選擇器」。如果class裡面包含了兩種的CSS名稱的話，則兩種的格式會一起套用。但如果「選擇器」有同樣的兩個名稱的話，會以第二個為主。
+16.老師怎麼找CSS模板，例：google打關鍵字：table css bootstrap，通常會去W3Cschool這個網站看。
+17.當你網頁滑到最下面的時候，自動幫你跟伺服器跟你做一次request，可以去開發人員工具裡面的記錄找開頭「post」的記錄，裡面的General網址複製，貼去其他分頁會出現大量文字，這就是JSON。

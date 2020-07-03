@@ -1,0 +1,39 @@
+USE db01;
+CREATE TABLE employee(
+	empno		decimal(4)	PRIMARY KEY,
+    ename		varchar(30)	NOT NULL,
+    hiredate	date		NOT NULL,
+    salary		int			NOT NULL,
+    deptno		decimal(3)	NOT NULL,
+    title		varchar(20)	NOT NULL);
+    
+CREATE TABLE `db01`.`department` (
+  `deptno` DECIMAL(3) NOT NULL,
+  `dname` VARCHAR(30) NOT NULL,
+  `mgrno` DECIMAL(4) NULL,
+  PRIMARY KEY (`deptno`));
+
+CREATE DATABASE IF NOT EXISTS db02;
+USE db02;
+CREATE TABLE IF NOT EXISTS test(switch_use VARCHAR(10));
+SHOW TABLE STATUS;
+SHOW TABLE STATUS IN db01;
+SHOW TABLE STATUS FROM db02;
+DROP DATABASE db02;
+SHOW TABLES;
+DESC employee;
+
+CREATE TABLE t (a INT, b DOUBLE, c CHAR(10));
+DESC t;
+ALTER TABLE t ADD d decimal(3);
+ALTER TABLE t MODIFY c VARCHAR(10);
+ALTER TABLE t CHANGE d e DECIMAL(5);
+ALTER TABLE t ADD f CHAR FIRST;
+ALTER TABLE t MODIFY f FLOAT AFTER b;
+ALTER TABLE t DROP f;
+ALTER TABLE t RENAME ttttt;
+DROP TABLE IF EXISTS ttttt;
+
+CREATE TABLE employee1 LIKE employee;
+DESC employee1; 
+DROP TABLE IF EXISTS employee1;

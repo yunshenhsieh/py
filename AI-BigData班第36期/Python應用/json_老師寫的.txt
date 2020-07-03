@@ -1,0 +1,232 @@
+
+Transform the table to a json type
+
+There is a file Staff.txt:
+ID 	Name 	DeptId 	Age 	Gender 	Salary
+001 	Jay 	001 	50 	M 	56000
+002 	Jenny 	001 	30 	F 	47000
+003 	Rick 	002 	45 	M 	50000
+004 	David 	003 	47 	M 	45000
+005 	Jake 	002 	32 	M 	55000
+006 	Abby 	001 	25 	F 	40000
+007 	Trump 	003 	80 	M 	90000
+008 	Eric 	001 	26 	M 	85000
+
+Tyr to transform it to json type
+Just like this:
+
+{
+    '001': {
+        'ID': '001',
+        'Name': 'Jay',
+        'DeptId': '001',
+        'Age': '50',
+        'Gender': 'M',
+        'Salary': '56000'
+    },
+    '002': {
+        'ID': '002',
+        'Name': 'Jenny',
+        'DeptId': '001',
+        'Age': '30',
+        'Gender': 'F',
+        'Salary': '47000'
+    },
+    '003': {
+        'ID': '003',
+        'Name': 'Rick',
+        'DeptId': '002',
+        'Age': '45',
+        'Gender': 'M',
+        'Salary': '50000'
+    },
+
+            .
+            .
+            .
+
+}
+
+In [1]:
+
+# Open the txt file
+filename = r'Staff.txt'
+
+with open(filename, 'r', encoding='utf-8') as f:
+    table = f.readlines()
+
+# Press "Ctrl + Enter" or "Shift + Enter" to execute this block
+# to have a look at the "table string".
+table
+
+Out[1]:
+
+['| ID  |  Name | DeptId| Age | Gender | Salary |\n',
+ '| --- |  ---  |  ---  | --- |  ---   | ------ |\n',
+ '| 001 | Jay   | 001   | 50  |   M    | 56000  |\n',
+ '| 002 | Jenny | 001   | 30  |   F    | 47000  |\n',
+ '| 003 | Rick  | 002   | 45  |   M    | 50000  |\n',
+ '| 004 | David | 003   | 47  |   M    | 45000  |\n',
+ '| 005 | Jake  | 002   | 32  |   M    | 55000  |\n',
+ '| 006 | Abby  | 001   | 25  |   F    | 40000  |\n',
+ '| 007 | Trump | 003   | 80  |   M    | 90000  |\n',
+ '| 008 | Eric  | 001   | 26  |   M    | 85000  |']
+
+In [2]:
+
+# We don't need the "\n" and "blank, so replace them"
+table = [r.replace('\n', '').replace(' ', '') for r in table]
+table
+
+Out[2]:
+
+['|ID|Name|DeptId|Age|Gender|Salary|',
+ '|---|---|---|---|---|------|',
+ '|001|Jay|001|50|M|56000|',
+ '|002|Jenny|001|30|F|47000|',
+ '|003|Rick|002|45|M|50000|',
+ '|004|David|003|47|M|45000|',
+ '|005|Jake|002|32|M|55000|',
+ '|006|Abby|001|25|F|40000|',
+ '|007|Trump|003|80|M|90000|',
+ '|008|Eric|001|26|M|85000|']
+
+In [3]:
+
+# To get column, we need only the 0th object in the list
+table[0]
+
+Out[3]:
+
+'|ID|Name|DeptId|Age|Gender|Salary|'
+
+In [4]:
+
+# Transform the table[0] string to a column list
+# But there are two blanks except for the column names, and we don't need them
+column = table[0].split('|')
+column
+
+Out[4]:
+
+['', 'ID', 'Name', 'DeptId', 'Age', 'Gender', 'Salary', '']
+
+In [5]:
+
+# Extract the column part
+# Now we got column list
+column = column[1:-1]
+column
+
+Out[5]:
+
+['ID', 'Name', 'DeptId', 'Age', 'Gender', 'Salary']
+
+In [6]:
+
+# And then transform the datas part in "table"
+# Extract datas from the index 2 in table
+table[2:]
+
+Out[6]:
+
+['|001|Jay|001|50|M|56000|',
+ '|002|Jenny|001|30|F|47000|',
+ '|003|Rick|002|45|M|50000|',
+ '|004|David|003|47|M|45000|',
+ '|005|Jake|002|32|M|55000|',
+ '|006|Abby|001|25|F|40000|',
+ '|007|Trump|003|80|M|90000|',
+ '|008|Eric|001|26|M|85000|']
+
+In [7]:
+
+# Transform the data just like you transform the column
+data = [r.split('|')[1:-1] for r in table[2:]]
+data
+
+Out[7]:
+
+[['001', 'Jay', '001', '50', 'M', '56000'],
+ ['002', 'Jenny', '001', '30', 'F', '47000'],
+ ['003', 'Rick', '002', '45', 'M', '50000'],
+ ['004', 'David', '003', '47', 'M', '45000'],
+ ['005', 'Jake', '002', '32', 'M', '55000'],
+ ['006', 'Abby', '001', '25', 'F', '40000'],
+ ['007', 'Trump', '003', '80', 'M', '90000'],
+ ['008', 'Eric', '001', '26', 'M', '85000']]
+
+In [8]:
+
+# Combine column part and data part, and generate a json
+jsdata = {staff[0]: {column[col]: dt for col, dt in enumerate(staff)} for staff in data}
+jsdata
+
+Out[8]:
+
+{'001': {'ID': '001',
+  'Name': 'Jay',
+  'DeptId': '001',
+  'Age': '50',
+  'Gender': 'M',
+  'Salary': '56000'},
+ '002': {'ID': '002',
+  'Name': 'Jenny',
+  'DeptId': '001',
+  'Age': '30',
+  'Gender': 'F',
+  'Salary': '47000'},
+ '003': {'ID': '003',
+  'Name': 'Rick',
+  'DeptId': '002',
+  'Age': '45',
+  'Gender': 'M',
+  'Salary': '50000'},
+ '004': {'ID': '004',
+  'Name': 'David',
+  'DeptId': '003',
+  'Age': '47',
+  'Gender': 'M',
+  'Salary': '45000'},
+ '005': {'ID': '005',
+  'Name': 'Jake',
+  'DeptId': '002',
+  'Age': '32',
+  'Gender': 'M',
+  'Salary': '55000'},
+ '006': {'ID': '006',
+  'Name': 'Abby',
+  'DeptId': '001',
+  'Age': '25',
+  'Gender': 'F',
+  'Salary': '40000'},
+ '007': {'ID': '007',
+  'Name': 'Trump',
+  'DeptId': '003',
+  'Age': '80',
+  'Gender': 'M',
+  'Salary': '90000'},
+ '008': {'ID': '008',
+  'Name': 'Eric',
+  'DeptId': '001',
+  'Age': '26',
+  'Gender': 'M',
+  'Salary': '85000'}}
+
+In [9]:
+
+# Turn it to a json string
+import json
+jsdata_str = json.dumps(jsdata)
+jsdata_str
+
+Out[9]:
+
+'{"001": {"ID": "001", "Name": "Jay", "DeptId": "001", "Age": "50", "Gender": "M", "Salary": "56000"}, "002": {"ID": "002", "Name": "Jenny", "DeptId": "001", "Age": "30", "Gender": "F", "Salary": "47000"}, "003": {"ID": "003", "Name": "Rick", "DeptId": "002", "Age": "45", "Gender": "M", "Salary": "50000"}, "004": {"ID": "004", "Name": "David", "DeptId": "003", "Age": "47", "Gender": "M", "Salary": "45000"}, "005": {"ID": "005", "Name": "Jake", "DeptId": "002", "Age": "32", "Gender": "M", "Salary": "55000"}, "006": {"ID": "006", "Name": "Abby", "DeptId": "001", "Age": "25", "Gender": "F", "Salary": "40000"}, "007": {"ID": "007", "Name": "Trump", "DeptId": "003", "Age": "80", "Gender": "M", "Salary": "90000"}, "008": {"ID": "008", "Name": "Eric", "DeptId": "001", "Age": "26", "Gender": "M", "Salary": "85000"}}'
+
+In [10]:
+
+# Save the json string as a text file
+with open(r'./Staff.json', 'w', encoding='utf-8') as f:
+    f.write(jsdata_str)
+
